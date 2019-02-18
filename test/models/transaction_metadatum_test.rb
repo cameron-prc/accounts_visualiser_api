@@ -12,11 +12,7 @@ class TransactionMetadatumTest < ActiveSupport::TestCase
 
     transaction_metadatum.transaction_object = @transaction
 
-    assert_nothing_raised do
-
-      transaction_metadatum.save!
-
-    end
+    assert_raise(ActiveRecord::RecordInvalid) { transaction_metadatum.save! }
 
   end
 
@@ -36,11 +32,7 @@ class TransactionMetadatumTest < ActiveSupport::TestCase
 
     transaction_metadatum.transaction_object = @transaction
 
-    assert_nothing_raised do
-
-      transaction_metadatum.save!
-
-    end
+    assert_raise(ActiveRecord::RecordInvalid) { transaction_metadatum.save! }
 
   end
 
@@ -56,9 +48,23 @@ class TransactionMetadatumTest < ActiveSupport::TestCase
 
   test "Transaction metadata must have a transaction" do
 
-    transaction_metadatum = TransactionMetadatum.new({ field: "", value: "Details" })
+    transaction_metadatum = TransactionMetadatum.new({ field: "Field", value: "Details" })
 
     assert_raise(ActiveRecord::RecordInvalid) { transaction_metadatum.save! }
+
+  end
+
+  test "valid record will save" do
+
+    transaction_metadatum = TransactionMetadatum.new({ field: "Field", value: "Details" })
+
+    transaction_metadatum.transaction_object = @transaction
+
+    assert_nothing_raised do
+
+      transaction_metadatum.save!
+
+    end
 
   end
 
