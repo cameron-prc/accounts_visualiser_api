@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_18_052407) do
+ActiveRecord::Schema.define(version: 2019_02_18_061104) do
+
+  create_table "transaction_metadata", force: :cascade do |t|
+    t.integer "transaction_id"
+    t.string "field"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["transaction_id"], name: "index_transaction_metadata_on_transaction_id"
+  end
 
   create_table "transactions", force: :cascade do |t|
     t.decimal "amount", null: false
