@@ -51,5 +51,4 @@ class TransactionTest < ActiveSupport::TestCase
 
   end
 
-  
 end
