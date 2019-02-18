@@ -37,5 +37,19 @@ class TransactionTest < ActiveSupport::TestCase
 
     assert_raise(ActiveRecord::RecordInvalid) { transaction.save! }
   end
+
+  test "Transaction can have metadata" do
+    transaction = Transaction.new({ amount: 0.00, details: "Details", date: Date.new, transaction_type: "Type" })
+
+    transaction.transaction_metadata.build( field: 'Field', value: 'Value')
+    transaction.transaction_metadata.build( field: 'Field', value: 'Value')
+    transaction.transaction_metadata.build( field: 'Field', value: 'Value')
+
+    transaction.save!
+
+    assert_equal transaction.transaction_metadata.length, 3
+
+  end
+
   
 end
