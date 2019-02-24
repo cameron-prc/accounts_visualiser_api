@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_18_061104) do
+ActiveRecord::Schema.define(version: 2019_02_24_042616) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "filters", force: :cascade do |t|
+    t.integer "category_id"
+    t.string "field"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_filters_on_category_id"
+  end
 
   create_table "transaction_metadata", force: :cascade do |t|
     t.integer "transaction_id"
