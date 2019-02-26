@@ -41,7 +41,7 @@ class TransactionsController < ApplicationController
     end
 
     def transaction_params
-      params.require(:transaction).permit( :date, :amount, :details )
+      params.require(:transaction).permit( :date, :amount, :details, transaction_metadata_attributes: [:field, :value] )
     end
 
     def transaction_search_params
